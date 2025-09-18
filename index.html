@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Министерство культуры и творчества</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #2E8B75;
+            --right-block: #1E3A5F;
+            --photo-frame: #A7D8F0;
+            --ministry-title: #F7E3B6;
+            --text-light: #F2F4F7;
+            --minister-role: #D9A441;
+            --consul-role: #F2D134;
+            --accent-maroon: #8C2F39;
+            --accent-gold: #F2B134;
+            --accent-pink: #F9C6CF;
+            --accent-blue: #4A90E2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1365px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Левая секция */
+        .left-section {
+            width: 67%;
+            padding-right: 36px;
+        }
+
+        .ministry-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 56px;
+            line-height: 58px;
+            color: var(--ministry-title);
+            text-align: center;
+            margin-top: 38px;
+            margin-bottom: 40px;
+            letter-spacing: 0.2px;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 200px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            background-color: var(--photo-frame);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            padding: 12px;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .info-box {
+            width: 200px;
+            height: 64px;
+            background-color: var(--right-block);
+            border-radius: 12px;
+            margin-top: -10px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .name {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 20px;
+            color: var(--text-light);
+            text-align: center;
+            letter-spacing: 0.2px;
+        }
+
+        .role {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 16px;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        .minister {
+            color: var(--minister-role);
+        }
+
+        .consul {
+            color: var(--consul-role);
+        }
+
+        .description {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--text-light);
+            width: 58%;
+            margin-top: 18px;
+            margin-bottom: 24px;
+        }
+
+        .slogan {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 44px;
+            line-height: 48px;
+            color: var(--photo-frame);
+            text-align: center;
+            margin-bottom: 28px;
+            margin-top: 20px;
+        }
+
+        /* Правая секция */
+        .right-section {
+            width: 33%;
+            background-color: var(--right-block);
+            border-radius: 32px;
+            padding: 36px;
+            position: relative;
+        }
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            border-top-right-radius: 40px;
+            background: var(--right-block);
+            z-index: 2;
+        }
+
+        .theme-switcher {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            display: flex;
+            gap: 12px;
+            z-index: 3;
+        }
+
+        .circle {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .circle:hover {
+            transform: scale(1.2);
+        }
+
+        #theme-maroon {
+            background-color: var(--accent-maroon);
+        }
+
+        #theme-gold {
+            background-color: var(--accent-gold);
+        }
+
+        #theme-pink {
+            background-color: var(--accent-pink);
+        }
+
+        #theme-default {
+            background-color: var(--main-bg);
+            border: 1px solid var(--text-light);
+        }
+
+        .right-section h3 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 30px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .priorities-list {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+
+        .priorities-list li {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.4;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .priorities-list li::before {
+            content: '•';
+            color: var(--text-light);
+            position: absolute;
+            left: -8px;
+        }
+
+        .why-choose {
+            margin-top: 20px;
+        }
+
+        .right-section p {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 26px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .we-are-here {
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        .final-note {
+            font-size: 16px;
+            margin-top: 12px;
+        }
+
+        .telegram-button {
+            display: block;
+            background-color: var(--accent-blue);
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+        }
+
+        .telegram-button:hover {
+            background-color: #3a7bc8;
+        }
+
+        /* Страницы участников */
+        .member-page {
+            display: none;
+            width: 100%;
+            padding: 30px;
+            background-color: var(--right-block);
+            border-radius: 32px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+        }
+
+        .member-content {
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .member-photo {
+            width: 250px;
+            height: 250px;
+            background-color: var(--photo-frame);
+            border-radius: 28px;
+            overflow: hidden;
+            margin-right: 40px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .member-photo div {
+            width: 100%;
+            height: 100%;
+            background: #ddd;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .member-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .member-name {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .member-role {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .member-responsibility {
+            margin-bottom: 25px;
+        }
+
+        .member-responsibility h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .member-responsibility ul {
+            list-style-type: none;
+        }
+
+        .member-responsibility li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .member-responsibility li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--text-light);
+        }
+
+        .member-about {
+            font-style: italic;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .left-section, .right-section {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .right-section {
+                border-radius: 0 0 32px 32px;
+                margin-bottom: 30px;
+            }
+            
+            .cards-container {
+                justify-content: space-around;
+            }
+            
+            .description {
+                width: 100%;
+            }
+            
+            .ministry-title {
+                font-size: 42px;
+                line-height: 46px;
+            }
+            
+            .slogan {
+                font-size: 36px;
+                line-height: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .ministry-title {
+                font-size: 32px;
+                line-height: 36px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .card {
+                width: 160px;
+            }
+            
+            .photo-frame {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .info-box {
+                width: 160px;
+            }
+            
+            .name {
+                font-size: 18px;
+            }
+            
+            .role {
+                font-size: 14px;
+            }
+            
+            .slogan {
+                font-size: 28px;
+                line-height: 32px;
+            }
+            
+            .right-section h3 {
+                font-size: 20px;
+            }
+            
+            .right-section p, .priorities-list li {
+                font-size: 16px;
+            }
+            
+            .member-photo {
+                width: 200px;
+                height: 200px;
+                margin-right: 0;
+                margin: 0 auto 20px;
+            }
+            
+            .member-name {
+                font-size: 28px;
+            }
+            
+            .member-role {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 140px;
+            }
+            
+            .photo-frame {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .info-box {
+                width: 140px;
+            }
+            
+            .name {
+                font-size: 16px;
+            }
+            
+            .ministry-title {
+                font-size: 28px;
+                line-height: 32px;
+            }
+            
+            .slogan {
+                font-size: 24px;
+                line-height: 28px;
+            }
+            
+            .member-photo {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .member-name {
+                font-size: 24px;
+            }
+            
+            .member-role {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Левая секция -->
+        <div class="left-section">
+            <h1 class="ministry-title">Министерство культуры<br>и творчества</h1>
+            
+          <div class="cards-container">
+    <!-- Карточка 1 -->
+    <div class="card" data-member="madina">
+        <div class="photo-frame">
+            <img src="sticker1.webp" alt="Зеберхан Мадина" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+        </div>
+        <div class="info-box">
+            <div class="name">Зеберхан Мадина 9"A"</div>
+            <div class="role consul">Консул</div>
+        </div>
+    </div>
+    
+    <!-- Карточка 2 -->
+    <div class="card" data-member="olzhas">
+        <div class="photo-frame">
+            <img src="sticker.webp" alt="Султанмурат Олжас" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+        </div>
+        <div class="info-box">
+            <div class="name">Султанмурат Олжас 10"B"</div>
+            <div class="role minister">Министр</div>
+        </div>
+    </div>
+    
+    <!-- Карточка 3 -->
+    <div class="card" data-member="renard">
+        <div class="photo-frame">
+            <img src="s2ticker.png" alt="Мирсиев Ренард" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+        </div>
+        <div class="info-box">
+            <div class="name">Мирсиев Ренард 9"B"</div>
+            <div class="role consul">Консул</div>
+        </div>
+    </div>
+</div>
+            
+            <p class="description">
+                Наше Министерство по культуре и креативу — это место, где каждый может показать себя.
+                Мы делаем концерты, фестивали, турниры и конкурсы, чтобы школа была яркой и живой.
+                Мы всегда поддержим активных ребят и открыты для любых идей — твоя инициатива имеет значение!
+            </p>
+            
+            <h2 class="slogan">Школа, где твой голос имеет значение</h2>
+            
+            <!-- Страницы участников -->
+            <!-- Страница Мадины -->
+            <div class="member-page" id="madina-page">
+                <button class="back-button">← Назад</button>
+                <div class="member-content">
+            <img src="sticker1.webp" alt="Зеберхан Мадина" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">Зеберхан Мадина 9"А"</h2>
+                        <div class="member-role consul">Консул</div>
+                        
+                        <div class="member-responsibility">
+                            <h4>Зона ответственности:</h4>
+                            <ul>
+                                <li>Интерьер и оформление школы к праздникам</li>
+                                <li>Создание тематических инсталляций (арт-зоны, фотозоны, декорации)</li>
+                                <li>Работа с эстетикой школьных пространств</li>
+                                <li>Курирование творческих проектов по дизайну и искусству</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="member-about">
+                            Мадина — человек с художественным вкусом и вниманием к деталям. Её цель — чтобы школа выглядела вдохновляюще, а каждый праздник запоминался атмосферой.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Страница Олжаса -->
+            <div class="member-page" id="olzhas-page">
+                <button class="back-button">← Назад</button>
+                <div class="member-content">
+            <img src="sticker.webp" alt="Султанмурат Олжас" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">Султанмурат Олжас 10"B"</h2>
+                        <div class="member-role minister">Министр</div>
+                        
+                        <div class="member-responsibility">
+                            <h4>Зона ответственности:</h4>
+                            <ul>
+                                <li>Переговоры и согласование мероприятий с директором школы</li>
+                                <li>Финансовая часть: распределение бюджета и контроль расходов</li>
+                                <li>Организация фестивалей, концертов, турниров</li>
+                                <li>Управление командой и помощь консулам в реализации проектов</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="member-about">
+                            Олжас — организатор и лидер. Его сильные стороны — коммуникация, умение решать вопросы и доводить проекты до результата. Он отвечает за то, чтобы идеи министерства были услышаны и получили поддержку администрации.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Страница Ренарда -->
+            <div class="member-page" id="renard-page">
+                <button class="back-button">← Назад</button>
+                <div class="member-content">
+            <img src="s2ticker.png" alt="Мирсиев Ренард" style="width:100%; height:100%; object-fit: cover; border-radius:16px;">
+
+                    </div>
+                    <div class="member-info">
+                        <h2 class="member-name">Мирсиев Ренард 9"B"</h2>
+                        <div class="member-role consul">Консул</div>
+                        
+                        <div class="member-responsibility">
+                            <h4>Зона ответственности:</h4>
+                            <ul>
+                                <li>Информационная поддержка: анонсы мероприятий, афиши, посты</li>
+                                <li>Общение с учениками: помощь в записи на кружки, турниры, конкурсы</li>
+                                <li>Работа с Министерством информации для распространения новостей</li>
+                                <li>Обратная связь: возможность задать вопрос или предложить идею</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="member-about">
+                            Ренард — человек, который умеет донести информацию понятно и интересно. Его цель — чтобы никто не оставался в стороне, а каждый чувствовал себя частью школьной жизни.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Правая секция -->
+        <div class="right-section">
+            <div class="theme-switcher">
+                <div class="circle" id="theme-maroon" title="Строгая тема"></div>
+                <div class="circle" id="theme-gold" title="Праздничная тема"></div>
+                <div class="circle" id="theme-pink" title="Тёплая тема"></div>
+                <div class="circle" id="theme-default" title="Стандартная тема"></div>
+            </div>
+            
+            <h3>Наши приоритеты</h3>
+            <ul class="priorities-list">
+                <li>Поддержка творчества: музыка, театр, рисование, проекты</li>
+                <li>Организация концертов, фестивалей и конкурсов</li>
+                <li>Проведение спортивных и киберспортивных турниров</li>
+                <li>Живая помощь каждому ученику, открытая обратная связь</li>
+                <li>Призы, грамоты и признание для самых активных</li>
+                <li>Сотрудничество с другими министерствами ради комфорта всех</li>
+            </ul>
+            
+            <div class="why-choose">
+                <h3>Почему стоит выбрать нас</h3>
+                <p>
+                    Мы хотим, чтобы школа была местом,
+                    куда приходишь не только за уроками,
+                    но и за эмоциями, движением и возможностями.
+                    У тебя есть идея — мы поможем воплотить её в жизнь.
+                    Хочешь участвовать — мы найдём для тебя конкурс, сцену или турнир.
+                </p>
+            </div>
+            
+            <p class="we-are-here">Мы всегда рядом:</p>
+            <ul class="priorities-list">
+                <li>поддержим</li>
+                <li>подскажем</li>
+                <li>порадуем призами за твою активность</li>
+            </ul>
+            
+            <p class="final-note">Для нас важно, чтобы каждый чувствовал себя частью команды.</p>
+            
+            <a href="https://t.me/example" class="telegram-button" target="_blank">Наш Telegram-канал</a>
+        </div>
+    </div>
+
+    <script>
+        // Функция смены темы
+        document.getElementById('theme-maroon').addEventListener('click', function() {
+            document.documentElement.style.setProperty('--main-bg', '#5A2E34');
+            document.documentElement.style.setProperty('--right-block', '#3A1E28');
+            document.documentElement.style.setProperty('--photo-frame', '#D4A7B8');
+            document.documentElement.style.setProperty('--ministry-title', '#F2D0A9');
+        });
+        
+        document.getElementById('theme-gold').addEventListener('click', function() {
+            document.documentElement.style.setProperty('--main-bg', '#B38E3D');
+            document.documentElement.style.setProperty('--right-block', '#5C4729');
+            document.documentElement.style.setProperty('--photo-frame', '#F2E0A9');
+            document.documentElement.style.setProperty('--ministry-title', '#FFF1CC');
+        });
+        
+        document.getElementById('theme-pink').addEventListener('click', function() {
+            document.documentElement.style.setProperty('--main-bg', '#D48E9E');
+            document.documentElement.style.setProperty('--right-block', '#6E4555');
+            document.documentElement.style.setProperty('--photo-frame', '#F9D6DF');
+            document.documentElement.style.setProperty('--ministry-title', '#FAE6E6');
+        });
+        
+        document.getElementById('theme-default').addEventListener('click', function() {
+            document.documentElement.style.setProperty('--main-bg', '#2E8B75');
+            document.documentElement.style.setProperty('--right-block', '#1E3A5F');
+            document.documentElement.style.setProperty('--photo-frame', '#A7D8F0');
+            document.documentElement.style.setProperty('--ministry-title', '#F7E3B6');
+        });
+
+        // Функционал для страниц участников
+        const cards = document.querySelectorAll('.card');
+        const memberPages = document.querySelectorAll('.member-page');
+        const backButtons = document.querySelectorAll('.back-button');
+        const leftSection = document.querySelector('.left-section');
+        
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                const member = this.getAttribute('data-member');
+                
+                // Скрываем основной контент
+                document.querySelector('.ministry-title').style.display = 'none';
+                document.querySelector('.cards-container').style.display = 'none';
+                document.querySelector('.description').style.display = 'none';
+                document.querySelector('.slogan').style.display = 'none';
+                
+                // Показываем страницу участника
+                document.getElementById(`${member}-page`).style.display = 'block';
+            });
+        });
+        
+        backButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Скрываем все страницы участников
+                memberPages.forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Показываем основной контент
+                document.querySelector('.ministry-title').style.display = 'block';
+                document.querySelector('.cards-container').style.display = 'flex';
+                document.querySelector('.description').style.display = 'block';
+                document.querySelector('.slogan').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
